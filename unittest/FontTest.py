@@ -1,36 +1,54 @@
 #!/usr/bin/env python3.0
 # -*- coding: UTF-8 -*-
 
+from os import listdir
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 import reportlab.rl_config
-reportlab.rl_config.warnOnMissingFontGlyphs = 0
-#reportlab.rl_config.TTFSearchPath.append("/usr/share/fonts/truetype/arphic/")
-
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-#pdfmetrics.registerFont(TTFont('uming', 'uming.ttc'))
-pdfmetrics.registerFont(TTFont('Vera', 'Vera.ttf'))
-pdfmetrics.registerFont(TTFont('kk', 'ARIALUNI.TTF'))
+import pdb
+
+reportlab.rl_config.warnOnMissingFontGlyphs = 0
+reportlab.rl_config.TTFSearchPath.append("/usr/share/fonts/truetype/freefont/")
+reportlab.rl_config.TTFSearchPath.append("/usr/share/fonts/truetype/arphic/")
+reportlab.rl_config.TTFSearchPath.append("/usr/share/fonts/truetype/thai")
+
+font_list = []
+for i in reportlab.rl_config.TTFSearchPath:
+    for j in listdir(i):
+        # j: FreeMonoBoldOblique.ttf
+        # j.split('.')[0]: FreeMonoBoldOblique
+        pdfmetrics.registerFont(TTFont(j.split('.')[0], j))
+        font_list.append(j.split('.')[0])
+
+font_size = 12
+
+upper = 810
+under = 20
+pos_x = 40
 
 def GenPdf(FileName):
-	canv = canvas.Canvas(FileName, pagesize = A4 )
-	#canv.setFont('uming', 32)
-	#canv.drawString(10, 350, "中文勒")
-	#canv.drawString(10, 150, "Some text encoded in UTF-8")
-	canv.drawString(10, 320, "In the Vera TT Font!")
-	canv.setFont('Vera', 32)
-	canv.drawString(10, 290, "In the Vera TT Font!")
-	canv.setFont('Times-Italic', 32)
-	canv.drawString(10, 260, "In the Vera TT Font!")
-	canv.setFont('kk', 32)
-	canv.drawString(10, 230, "['kæmuflɑ:ʒ]")
-	canv.setFont('kk', 32)
-	canv.drawString(10, 21, "中文中文")
-	#canv.drawString(100, 100, "!!Hello World!!")
-	canv.showPage()
-	canv.save()
+    canv = canvas.Canvas(FileName, pagesize = A4 )
+    pos_y = upper
+
+    for i in range(len(font_list)):
+        if pos_y:
+            canv.setFont(font_list[i], font_size)
+            canv.drawString(pos_x, pos_y, str(i) + '. ' + font_list[i] + '  ' + 'Style')
+            canv.drawString(pos_x, pos_y - 15, "中文字型沒問題的啦")
+            canv.drawString(pos_x, pos_y - 15 * 2, "phonetic: " + "[fәu'netik]")
+            canv.drawString(pos_x, pos_y - 15 * 3, "iiiiiiiiiiiiiiiiii")
+            canv.drawString(pos_x, pos_y - 15 * 4, "TTTTTTTTTTTTTTTTTT")
+            canv.drawString(pos_x, pos_y - 15 * 5, "Take honour from me and my life is undone.")
+            pos_y -= (15 * 6)
+        else:
+            pos_y = upper
+            canv.showPage()
+
+    canv.showPage()
+    canv.save()
 
 if __name__ == "__main__":
-	GenPdf("FontTest.pdf")
+    GenPdf("MyPdf.pdf")
 
