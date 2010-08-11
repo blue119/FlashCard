@@ -30,9 +30,9 @@ row_gap = 5.6
 
 #           {"vac":1, "tense":0.3, "meaning":1.5, "sentence":1.5, "association":1,   "MIX":0.3} # [vac, tense, meaning, sentence, association, MIX]
 field_gap = {"vac":1, "tense":1.3, "meaning":2.8, "sentence":4.3, "association":5.3, "MIX":5.6} 
-MIX_gap = {"translate":3, "source":7.75}
+MIX_gap = {"translate":3.5, "source":8.4}
 
-def Table(canvas):
+def Table(canvas, DL = False):
 	c = canvas
 
 	# accurate issue
@@ -46,36 +46,37 @@ def Table(canvas):
 	'''
 
 	# Draw Dash Line
-	c.setDash(1,2)
-	for x in range(column):
-		for y in range(row):
-			c.line(
-				(top.get("x") + (x * column_gap))              * cm, (top.get("y") - field_gap.get("vac") - (y * row_gap)) * cm, 
-				(top.get("x") + (x * column_gap) + column_gap) * cm, (top.get("y") - field_gap.get("vac") - (y * row_gap)) * cm)
+	if DL:
+		c.setDash(1,2)
+		for x in range(column):
+			for y in range(row):
+				c.line(
+					(top.get("x") + (x * column_gap))              * cm, (top.get("y") - field_gap.get("vac") - (y * row_gap)) * cm, 
+					(top.get("x") + (x * column_gap) + column_gap) * cm, (top.get("y") - field_gap.get("vac") - (y * row_gap)) * cm)
 
-			c.line(
-				(top.get("x") + (x * column_gap))              * cm, (top.get("y") - field_gap.get("tense") - (y * row_gap)) * cm, 
-				(top.get("x") + (x * column_gap) + column_gap) * cm, (top.get("y") - field_gap.get("tense") - (y * row_gap)) * cm)
+				c.line(
+					(top.get("x") + (x * column_gap))              * cm, (top.get("y") - field_gap.get("tense") - (y * row_gap)) * cm, 
+					(top.get("x") + (x * column_gap) + column_gap) * cm, (top.get("y") - field_gap.get("tense") - (y * row_gap)) * cm)
 
-			c.line(
-				(top.get("x") + (x * column_gap))              * cm, (top.get("y") - field_gap.get("meaning") - (y * row_gap)) * cm, 
-				(top.get("x") + (x * column_gap) + column_gap) * cm, (top.get("y") - field_gap.get("meaning") - (y * row_gap)) * cm)
+				c.line(
+					(top.get("x") + (x * column_gap))              * cm, (top.get("y") - field_gap.get("meaning") - (y * row_gap)) * cm, 
+					(top.get("x") + (x * column_gap) + column_gap) * cm, (top.get("y") - field_gap.get("meaning") - (y * row_gap)) * cm)
 
-			c.line(
-				(top.get("x") + (x * column_gap))              * cm, (top.get("y") - field_gap.get("sentence") - (y * row_gap)) * cm, 
-				(top.get("x") + (x * column_gap) + column_gap) * cm, (top.get("y") - field_gap.get("sentence") - (y * row_gap)) * cm)
+				c.line(
+					(top.get("x") + (x * column_gap))              * cm, (top.get("y") - field_gap.get("sentence") - (y * row_gap)) * cm, 
+					(top.get("x") + (x * column_gap) + column_gap) * cm, (top.get("y") - field_gap.get("sentence") - (y * row_gap)) * cm)
 
-			c.line(
-				(top.get("x") + (x * column_gap))              * cm, (top.get("y") - field_gap.get("association") - (y * row_gap)) * cm, 
-				(top.get("x") + (x * column_gap) + column_gap) * cm, (top.get("y") - field_gap.get("association") - (y * row_gap)) * cm)
+				c.line(
+					(top.get("x") + (x * column_gap))              * cm, (top.get("y") - field_gap.get("association") - (y * row_gap)) * cm, 
+					(top.get("x") + (x * column_gap) + column_gap) * cm, (top.get("y") - field_gap.get("association") - (y * row_gap)) * cm)
 
-			c.line(
-				(top.get("x") + MIX_gap.get("translate") + (x * column_gap)) * cm, (top.get("y") - field_gap.get("association") - (y * row_gap)) * cm, 
-				(top.get("x") + MIX_gap.get("translate") + (x * column_gap)) * cm, (top.get("y") - field_gap.get("MIX")      - (y * row_gap)) * cm)
+				c.line(
+					(top.get("x") + MIX_gap.get("translate") + (x * column_gap)) * cm, (top.get("y") - field_gap.get("association") - (y * row_gap)) * cm, 
+					(top.get("x") + MIX_gap.get("translate") + (x * column_gap)) * cm, (top.get("y") - field_gap.get("MIX")      - (y * row_gap)) * cm)
 
-			c.line(
-				(top.get("x") + MIX_gap.get("source") + (x * column_gap)) * cm, (top.get("y") - field_gap.get("association") - (y * row_gap)) * cm, 
-				(top.get("x") + MIX_gap.get("source") + (x * column_gap)) * cm, (top.get("y") - field_gap.get("MIX")      - (y * row_gap)) * cm)
+				c.line(
+					(top.get("x") + MIX_gap.get("source") + (x * column_gap)) * cm, (top.get("y") - field_gap.get("association") - (y * row_gap)) * cm, 
+					(top.get("x") + MIX_gap.get("source") + (x * column_gap)) * cm, (top.get("y") - field_gap.get("MIX")      - (y * row_gap)) * cm)
 
 	#iString = "I am a string......."
 	#c.drawCentredString(5.625 * cm, 28.1 * cm, "X XXX XXX XXX XXX XXX XXX X")
@@ -211,12 +212,13 @@ def Content(c, row, x, y, DEBUG = False):
 		'</font>'
 
 	style.leading = 9
+	offset = 0.1
 	P = Paragraph(Meaning, style)
-	P.wrap(column_gap * cm, (field_gap.get("meaning") - field_gap.get("tense")) * cm)
+	P.wrap((column_gap - offset * 2) * cm, (field_gap.get("meaning") - field_gap.get("tense")) * cm)
 	newline = string_verify(string, 50)
 
 	# we can return fail when newline over your layout
-	P.drawOn(c, (top.get("x") + (x * column_gap) + 0.2) * cm, (top.get("y") - field_gap.get("meaning") + 0.7  - (0.17 * newline) - (y * row_gap)) * cm)
+	P.drawOn(c, (top.get("x") + (x * column_gap) + offset) * cm, (top.get("y") - field_gap.get("meaning") + 0.7  - (0.17 * newline) - (y * row_gap)) * cm)
 
 	#P.drawOn(c, (0.9 + (x * 9.75))* cm, (26.05 - (0.2 * newline) - (y * 7))* cm)
 
@@ -262,26 +264,29 @@ def Content(c, row, x, y, DEBUG = False):
 
 	P = Paragraph(Sentence, style)
 
-	P.wrap(column_gap * cm, (field_gap.get("sentence") - field_gap.get("meaning")) * cm)
+	P.wrap((column_gap - offset * 2) * cm, (field_gap.get("sentence") - field_gap.get("meaning")) * cm)
 	newline = string_verify(string, 50)
 
 	# we can return fail when newline over your layout
-	P.drawOn(c, (top.get("x") + (x * column_gap) + 0.2) * cm, (top.get("y") - field_gap.get("sentence") + 0.7  - (0.17 * newline) - (y * row_gap)) * cm)
-
-	#P.drawOn(c, 0.9 * cm, 23.2 * cm)
-	#c.drawString(11 * cm, 23.2 * cm, str(len(Sentence)))
+	P.drawOn(c, (top.get("x") + (x * column_gap) + offset) * cm, (top.get("y") - field_gap.get("sentence") + 0.7  - (0.17 * newline) - (y * row_gap)) * cm)
 	
 	#+-------------------------------------------------------------+
 	#|					   row[association]					  |
 	#+-------------------------------------------------------------+
 	
 	if DEBUG:
-		string = '1234567890 ' + \
-			'1234567890' + \
-		   '1234567890' + \
-			'1234567890' + \
-			'1234567890' + \
-			'1234567890' 
+		if y is 4:
+			string = 'discussion, conference, convention, council, session, seminar, symposium, assembly, rally, workshop, panel discussion'
+		elif y is 3:
+			string = ' convention, council, session, seminar, symposium, assembly, rally, workshop, panel discussion'
+		elif y is 2:
+			string = 'n, seminar, symposium, assembly, rally, workshop, panel discussion'
+		elif y is 1:
+			string = ' assembly, rally, workshop, panel discussion'
+		elif y is 0:
+			string = 'rkshop, panel discussion'
+		else:
+			string = ''
 	else:
 		string = row['association']
 
@@ -294,45 +299,47 @@ def Content(c, row, x, y, DEBUG = False):
 	Association = '<para align=center><font name = FreeMonoBold size = 8>' + \
 		string + \
 		'</font></para>'
+
 	P = Paragraph(Association, style)
-	P.wrap(9.5 * cm, 0.5 * cm)
-#	P.drawOn(c, (0.9 + (x * 9.75))* cm, (22.6 - (0.2 * newline) - (y * 7))* cm)
+	P.wrap((column_gap - offset * 2) * cm, (field_gap.get("association") - field_gap.get("sentence")) * cm)
+	P.drawOn(c, (top.get("x") + (x * column_gap) + offset) * cm, (top.get("y") - field_gap.get("association") + 0.4  - (0.17 * newline) - (y * row_gap)) * cm)
 	
 	#+-------------------------------------------------------------+
 	#|row[translate] |						  |				  |
 	#+-------------------------------------------------------------+
 	
 	if DEBUG:
-		Translate = '<font name=ukai>水銀, 汞</font>'
+		Translate = '<font name=ukai size=8>水銀, 汞</font>'
 	else:
 		Translate = '<font name=ukai size=8>' + row['translate'] + '</font>'
 	P = Paragraph(Translate, style)
-	P.wrap(3 * cm, 0.5 * cm)
-#	P.drawOn(c, (0.9 + (x * 9.75))* cm, (21.85- (y * 7))* cm)
+
+	P.wrap(MIX_gap.get("translate") * cm, (field_gap.get("MIX") - field_gap.get("association")) * cm)
+	P.drawOn(c, (top.get("x") + (x * column_gap) + offset) * cm, (top.get("y") -field_gap.get("MIX") - (y * row_gap)) * cm)
 	
 	#+-------------------------------------------------------------+
 	#|			   |		 row[source]	  |				  |
 	#+-------------------------------------------------------------+
 	
 	if DEBUG:
-		Source = '<para align=center>' + "Indonesia 'uncovers plot to kill" + '</para>'
+		Source = '<para align=center><font size=8>' + "Indonesia 'uncovers plot to kill" + '</font></para>'
 	else:
-		Source = '<para align=center>' + row['source'] + '</para>'
+		Source = '<para align=center><font size=8>' + row['source'] + '</font></para>'
 	P = Paragraph(Source, style)
-	P.wrap(5.75 * cm, 0.5 * cm)
-#	P.drawOn(c, (2.9 + (x * 9.75))* cm, (21.9 - (y * 7))* cm)
+	P.wrap((MIX_gap.get("source") - MIX_gap.get("translate")) * cm, (field_gap.get("MIX") - field_gap.get("association")) * cm)
+	P.drawOn(c, (top.get("x") + (x * column_gap) + MIX_gap.get("translate")) * cm, (top.get("y") -field_gap.get("MIX") - (y * row_gap)) * cm)
 	
 	#+-------------------------------------------------------------+
 	#|			   |						  | row[arrange_time]|
 	#+-------------------------------------------------------------+
 
 	if DEBUG:
-		Time = '<para align=right spaceb=3>' + '20080109' + '</para>'
+		Time = '<para align=right spaceb=3><font size=8>' + '20080109' + '</font></para>'
 	else:
-		Time = '<para align=right spaceb=3>' + row['arrange_time'] + '</para>'
+		Time = '<para align=right spaceb=3><font size=8>' + row['arrange_time'] + '</font></para>'
 	P = Paragraph(Time, style)
-	P.wrap(2 * cm, 0.5 * cm)
-#	P.drawOn(c, (8.3 + (x * 9.75))* cm, (21.9 - (y * 7))* cm)
+	P.wrap((column_gap - MIX_gap.get("source")) * cm, (field_gap.get("MIX") - field_gap.get("association")) * cm)
+	P.drawOn(c, (top.get("x") + (x * column_gap) + MIX_gap.get("source") - offset) * cm, (top.get("y") -field_gap.get("MIX") - (y * row_gap)) * cm)
 	
 def flash_card(DEBUG = False):
 	reportlab.rl_config.TTFSearchPath.append("/usr/share/fonts/truetype/freefont/")
@@ -371,5 +378,5 @@ def flash_card(DEBUG = False):
 	#c.save()
 
 if __name__ == "__main__":
-	flash_card(True)
+	flash_card()
 
